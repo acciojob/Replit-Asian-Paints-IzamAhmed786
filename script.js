@@ -1,27 +1,30 @@
-document.getElementById('change_button').addEventListener('click', function() {
-    const blockId = document.getElementById('block_id').value;
-    const color = document.getElementById('colour_id').value;
-    
-    // Reset all grid items
-    const items = document.querySelectorAll('.grid-item');
-    items.forEach(item => {
-        item.style.backgroundColor = 'transparent';
-    });
+ const changeBtn = document.getElementById("change_button");
+    const resetBtn = document.getElementById("Reset");
+    const gridItems = document.querySelectorAll(".grid-item");
 
-    // Change the color of the specified block
-    const selectedBlock = document.getElementById(blockId);
-    if (selectedBlock) {
-        selectedBlock.style.backgroundColor = color;
-    } else {
-        alert('Invalid Block ID');
+    // Reset function → makes all transparent
+    function resetGrid() {
+      gridItems.forEach(item => {
+        item.style.backgroundColor = "transparent";
+      });
     }
-});
 
-document.getElementById('Reset').addEventListener('click', function() {
-    const items = document.querySelectorAll('.grid-item');
-    items.forEach(item => {
-        item.style.backgroundColor = 'transparent';
+    // Change color function
+    changeBtn.addEventListener("click", () => {
+      const blockId = document.getElementById("block_id").value;
+      const color = document.getElementById("colour_id").value;
+
+      // reset first
+      resetGrid();
+
+      // find block and set color if valid
+      const block = document.getElementById(blockId);
+      if (block && color) {
+        block.style.backgroundColor = color;
+      } else {
+        alert("Please enter a valid Block ID (1–9) and a color.");
+      }
     });
-    document.getElementById('block_id').value = '';
-    document.getElementById('colour_id').value = '';
-});
+
+    // Reset button functionality
+    resetBtn.addEventListener("click", resetGrid);
